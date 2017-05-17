@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DesktopBridge.Extension</id>
+    <version>1.4.4</version>
+    <title>DesktopBridge.Extension</title>
+    <authors>Francesco Bonacci</authors>
+    <owners>Francesco Bonacci</owners>
+    <licenseUrl>https://TODO</licenseUrl>
+    <projectUrl>https://github.com/francedot</projectUrl>
+    <!--<iconUrl>http://TODO</iconUrl>-->
+    <description>
+DesktopBridge Extension to call Win32 APIs with a fluent syntax
+
+Features:
+
+- TODO    
+    </description>
+    <summary>DesktopBridge Extension to call Win32 APIs with a fluent syntax</summary>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>First Alpha Release</releaseNotes>
+    <language>en-US</language>
+    <tags>DesktopBridge uwp desktop centennial bridge win32</tags>
+
+		<dependencies>
+      <group targetFramework="uap10.0">
+        <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.2.3" />
+        <dependency id="Newtonsoft.Json" version="10.0.2" />
+      </group>
+    </dependencies>
+
+    <references>
+      <reference file="DesktopBridge.Extension.Shared.dll" />
+      <reference file="DesktopBridge.Extension.Interface.dll" />
+    </references>
+
+	</metadata>
+
+  <files>
+    <file src="init.ps1" target="tools\init.ps1" />
+    <file src="..\DesktopBridge.Extension.Shared\bin\Release\*.*" target="lib\uap10.0\"/>
+    <file src="..\DesktopBridge.Extension.Proxy.App\bin\Debug\*.*" target="tools/deploy" />
+
+    <file src="..\DesktopBridge.Extension.Interface\bin\x86\Release\*.*" target="build\x86" />
+    <file src="..\DesktopBridge.Extension.Interface\bin\x64\Release\*.*" target="build\x64" />
+    
+    <file src="..\DesktopBridge.Extension.Interface\bin\x86\Release\*.*" target="lib\uap10.0" />
+    <file src="..\DesktopBridge.Extension.Interface\bin\x64\Release\*.*" target="lib\uap10.0" />
+
+    <file src="DesktopBridge.Extension.props" target="build" />
+  </files>  
+
+</package>

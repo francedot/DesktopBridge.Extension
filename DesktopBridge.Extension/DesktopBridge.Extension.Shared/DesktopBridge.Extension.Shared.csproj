@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4578472C-E237-4D2D-9C27-1D549637C195}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DesktopBridge.Extension.Shared</RootNamespace>
+    <AssemblyName>DesktopBridge.Extension.Shared</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\RuntimeException.cs" />
+    <Compile Include="Exceptions\ProgramExecutionException.cs" />
+    <Compile Include="Exceptions\ProgramCompilationException.cs" />
+    <Compile Include="Extensions\DiagnosticExtension.cs" />
+    <Compile Include="Models\CompilationResult.cs" />
+    <Compile Include="Models\Diagnostic.cs" />
+    <Compile Include="Models\DiagnosticKind.cs" />
+    <Compile Include="Models\Parameter.cs" />
+    <Compile Include="Models\ProgramKind.cs" />
+    <Compile Include="Models\ProgramRequest.cs" />
+    <Compile Include="Models\ProgramResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y /s "$(SolutionDir)DesktopBridge.Extension.Shared\bin\$(ConfigurationName)\*" "$(SolutionDir)\DesktopBridge.Extension.SampleApp\bin\x64\$(ConfigurationName)\AppX\desktop\"
+xcopy /y /s "$(SolutionDir)DesktopBridge.Extension.Shared\bin\$(ConfigurationName)\*" "$(SolutionDir)\DesktopBridge.Extension.SampleApp\bin\x86\$(ConfigurationName)\AppX\desktop\"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

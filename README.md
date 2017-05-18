@@ -64,6 +64,32 @@ public async Task ExecuteMainProgramAsync(string code);
 public async Task ExecuteMainProgramFromFileAsync(string path);
 
 ```
+#### Example: Execute a Console Main Program
+
+```csharp
+
+var code =
+@"using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(""Hello Desktop Bridge!"");
+            Console.ReadLine();
+        }
+    }
+}";
+
+await DesktopBridgeExtension.Instance.ExecuteMainProgramAsync(code);
+
+```
 
 ### Executing Code Scripts
 
@@ -98,6 +124,8 @@ public async Task<TResult> ExecuteScriptAsync<TResult>(string code);
 /// <returns>The evaluated result</returns>
 public async Task<TResult> ExecuteScriptFromFileAsync<TResult>(string path);
 ```
+
+It is possible to pass some informations along with the Script by using the following set of Fluent APIs.
 
 #### Passing Parameters to a Script
 
@@ -152,4 +180,42 @@ public DesktopBridgeExtension WithReference(string referencePath);
 /// <returns></returns>
 public DesktopBridgeExtension WithReference(IEnumerable<string> referencePaths);
 
+```
+
+#### Example 1: Start a new Process passing its executable path
+
+```csharp
+
+var code =
+@"Process cmd = new Process
+  {
+    StartInfo = { FileName = path }
+  };
+  cmd.Start();";
+
+await DesktopBridgeExtension.Instance.WithParameter<string>("path", "myExe.exe").
+                                      ExecuteScriptAsync(code);
+
+```
+
+#### Example 2: Show a Notify Icon in the Taskbar
+
+```csharp
+
+var code =
+@"var notifyIcon = new NotifyIcon
+  {
+    BalloonTipText = @""Hello, NotifyIcon!"",
+    Text = @""Hello, NotifyIcon!"",
+    Icon = new Icon(""NotifyIcon.ico""),
+    Visible = true
+  };
+  notifyIcon.ShowBalloonTip(1000);";
+
+await DesktopBridgeExtension.Instance.WithUsing("System.Drawing").
+                                      WithUsing("System.Windows").
+                                      WithUsing("System.Windows.Forms").
+                                      WithUsing("System.Diagnostics").
+                                      WithUsing("System.Runtime.InteropServices").
+                                      ExecuteScriptAsync(code);
 ```

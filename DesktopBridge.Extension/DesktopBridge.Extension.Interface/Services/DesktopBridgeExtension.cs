@@ -113,7 +113,7 @@ namespace DesktopBridge.Extension.Interface.Services
             }
         }
 
-        internal void InflateConnection(AppServiceConnection appServiceConnection)
+        public void InflateConnection(AppServiceConnection appServiceConnection)
         {
             _middlewareConnection = appServiceConnection;
         }
